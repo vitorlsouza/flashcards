@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { saveDeckTitle, getDecks } from '../utils/api';
+import { saveDeckTitle, getDeck } from '../utils/api';
 
 class NewDeck extends Component {
   static navigationOptions = {
@@ -14,10 +15,22 @@ class NewDeck extends Component {
 
   addAndSaveDeck = (title) => {
     saveDeckTitle(title)
+      .then(() => {
+        getDeck(title)
+          .then((deck) => {
+            this.props.navigation.dispatch(NavigationActions.reset({
+              index: 1,
+              actions: [
+                NavigationActions.navigate({ routeName: 'Home'}),
+                NavigationActions.navigate({ routeName: 'Deck', params: {deck}})
+              ]
+            }))
+            AsyncStorage.setItem('@flashcards:deck', id)
+          })
+      })
 
-    getDecks().then(() => {
-      this.props.navigation.navigate('Decks')
-    })
+
+
 
     this.setState({ title: '' })
   }
@@ -38,7 +51,7 @@ class NewDeck extends Component {
           style={styles.submit}
           onPress={() => this.addAndSaveDeck(this.state.title)}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: 20}}>Submit</Text>
+          <Text style={{ color: '#FFFFFF', fontSize: 20}}>Create Deck</Text>
         </TouchableOpacity>
       </View>
     );
