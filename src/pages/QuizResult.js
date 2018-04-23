@@ -21,15 +21,19 @@ class QuizResult extends Component {
   }
 
   render() {
+    numCorrect = parseInt(this.state.correct)
+    numIncorrect = parseInt(this.state.incorrect)
     return (
       <View style={styles.container}>
         <View style={styles.textView}>
           <Text style={[styles.text, { color: '#0F7F12'}]}>Correct questions</Text>
           <Text style={styles.number}>{this.state.correct}</Text>
+          <Text style={styles.number}>{(numCorrect * 100)/(numIncorrect+numCorrect)}%</Text>
         </View>
         <View style={styles.textView}>
           <Text style={[styles.text, { color: '#D22A25'}]}>Incorrect questions</Text>
           <Text style={styles.number}>{this.state.incorrect}</Text>
+          <Text style={styles.number}>{(numIncorrect * 100)/(numCorrect+numIncorrect)}%</Text>
         </View>
         <View style={styles.button}>
           <TouchableOpacity
