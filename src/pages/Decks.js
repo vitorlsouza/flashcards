@@ -43,6 +43,7 @@ class Decks extends Component {
   openDeck = (id, deck) => {
     getDeck(id)
     this.props.navigation.navigate('Deck', { deck })
+    AsyncStorage.setItem('@flashcards:deck', id)
   }
 
   render() {

@@ -23,13 +23,13 @@ class Deck extends Component {
             style={styles.buttonAddCard}
             onPress={() => navigate('AddCard', { title }) }
           >
-            <Text style={{ fontSize: 22 }}>Add Card</Text>
+            <Text style={{ fontSize: 22 }}>Create New Question</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonStart}
             onPress={() => navigate('Quiz', {questions})}
           >
-            <Text style={{ fontSize: 22, color: '#FFFFFF' }}>Start Quiz</Text>
+            <Text style={{ fontSize: 22, color: '#FFFFFF' }}>Start a Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>

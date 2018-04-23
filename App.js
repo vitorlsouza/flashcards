@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { FontAwesome, Ionicons, Entypo } from '@expo/vector-icons'
 import Decks from './src/pages/Decks';
 import Deck from './src/pages/Deck';

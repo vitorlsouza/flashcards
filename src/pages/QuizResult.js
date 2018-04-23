@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
 import { View, Text, StyleSheet, AsyncStorage, TouchableOpacity, Dimensions } from 'react-native';
+import { getDeck } from '../utils/api';
 
 class QuizResult extends Component {
   state = {
@@ -20,6 +22,22 @@ class QuizResult extends Component {
     this.props.navigation.goBack()
   }
 
+  goToDeck = async () => {
+    const id = await AsyncStorage.getItem('@flashcards:deck')
+      .then((res) => {
+        getDeck(res)
+          .then((deck) => {
+            this.props.navigation.dispatch(NavigationActions.reset({
+              index: 1,
+              actions: [
+                NavigationActions.navigate({ routeName: 'Home'}),
+                NavigationActions.navigate({ routeName: 'Deck', params: {deck} }),
+              ],
+            }))
+          })
+      })
+  }
+
   render() {
     numCorrect = parseInt(this.state.correct)
     numIncorrect = parseInt(this.state.incorrect)
@@ -38,9 +56,9 @@ class QuizResult extends Component {
         <View style={styles.button}>
           <TouchableOpacity
           style={styles.buttonDecks}
-            onPress={() => this.props.navigation.navigate('Decks')}
+            onPress={() => this.goToDeck()}
           >
-            <Text style={{ color: '#FFFFFF', fontSize: 22 }}>Decks</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: 22 }}>Deck</Text>
           </TouchableOpacity>
           <TouchableOpacity
           style={styles.buttonReset}
