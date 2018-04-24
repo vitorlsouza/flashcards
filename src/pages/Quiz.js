@@ -75,7 +75,7 @@ class Quiz extends Component {
               <TouchableOpacity
                 onPress={() => this.showAnswer()}
               >
-                <Text style={styles.answer}>{this.state.show}</Text>
+                <Text style={styles.answer}>Answer</Text>
               </TouchableOpacity>
             </View>
           : <View style={styles.questionView}>
@@ -83,7 +83,7 @@ class Quiz extends Component {
               <TouchableOpacity
                 onPress={() => this.showQuestion()}
               >
-                <Text style={styles.answer}>{this.state.show}</Text>
+                <Text style={styles.answer}>Question</Text>
               </TouchableOpacity>
             </View>
         }
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   answer: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#D22A25',
     margin: 10,

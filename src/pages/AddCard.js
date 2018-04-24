@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { addCardToDeck } from '../utils/api';
+import { addCardToDeck, getDecks } from '../utils/api';
 
 class AddCard extends Component {
   state = {

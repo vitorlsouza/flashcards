@@ -6,7 +6,7 @@ const NOTIFICATION_KEY = 'flashcards:notifications'
 
 export function clearLocalNotification () {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync)
+    .then(Notifications.cancelAllScheduledNotificationAsync)
 }
 
 function createNotification () {
@@ -33,7 +33,7 @@ export function setLocalNotification () {
         Permissions.askAsync(Permissions.NOTIFICATIONS)
           .then(({ status }) => {
             if (status === 'granted') {
-              Notifications.cancelAllScheduledNotificationsAsync()
+              Notifications.cancelAllScheduledNotificationAsync()
 
               let tomorrow = new Date()
               tomorrow.setDate(tomorrow.getDate() + 1)

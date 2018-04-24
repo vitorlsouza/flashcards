@@ -27,7 +27,7 @@ class Decks extends Component {
   }
 
   componentWillMount() {
-    this.onRefreshDecks();
+    this.onRefreshDecks()
   }
 
   onRefreshDecks = () => {
@@ -57,18 +57,23 @@ class Decks extends Component {
           />
         }>
           {this.state.loading
-          ? <ActivityIndicator />
-          : Object.keys(this.state.decks).map(deck => (
-            <View key={deck}>
-              <TouchableOpacity
-                style={styles.card}
-                onPress={() => this.openDeck(deck, this.state.decks[deck])}
-              >
-                <Text style={{ fontSize: 24, fontWeight: 'bold'}}>{deck}</Text>
-                <Text style={{ fontSize: 16, opacity: 0.6 }}>{this.state.decks[deck].questions.length} cards</Text>
-              </TouchableOpacity>
-            </View>
-          ))
+            ? <ActivityIndicator />
+            : this.state.decks === null
+              ? <View>
+                  <Text style={styles.text}>Nenhum deck encontrado!</Text>
+                  <Text style={styles.text}>Puxe a tela para carregar os decks!</Text>
+                </View>
+              : Object.keys(this.state.decks).map(deck => (
+              <View key={deck}>
+                <TouchableOpacity
+                  style={styles.card}
+                  onPress={() => this.openDeck(deck, this.state.decks[deck])}
+                >
+                  <Text style={{ fontSize: 24, fontWeight: 'bold'}}>{deck}</Text>
+                  <Text style={{ fontSize: 16, opacity: 0.6 }}>{this.state.decks[deck].questions.length} cards</Text>
+                </TouchableOpacity>
+              </View>
+            ))
           }
       </ScrollView>
     );
@@ -78,6 +83,10 @@ class Decks extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  text: {
+    fontSize: 22,
+    textAlign: 'center',
   },
   card: {
     flex: 1,

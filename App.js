@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation'
 import { FontAwesome, Ionicons, Entypo } from '@expo/vector-icons'
-import Decks from './src/pages/Decks';
-import Deck from './src/pages/Deck';
-import Quiz from './src/pages/Quiz';
-import NewDeck from './src/pages/NewDeck';
-import AddCard from './src/pages/AddCard';
-import QuizResult from './src/pages/QuizResult';
-import './src/config/ReactotronConfig';
+import { setLocalNotification, clearLocalNotification } from './src/utils/helpers'
+import Decks from './src/pages/Decks'
+import Deck from './src/pages/Deck'
+import Quiz from './src/pages/Quiz'
+import NewDeck from './src/pages/NewDeck'
+import AddCard from './src/pages/AddCard'
+import QuizResult from './src/pages/QuizResult'
+import './src/config/ReactotronConfig'
 
 console.disableYellowBox = true;
 
@@ -56,7 +57,10 @@ const Routes = StackNavigator({
   }
 })
 
-export default class App extends React.Component {
+export default class App extends Component {
+  componentDidMount() {
+    // setLocalNotification()
+  }
   render() {
     return <Routes />
   }
