@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { addCardToDeck, getDecks } from '../utils/api';
+import { addCardToDeck, getDeck } from '../utils/api';
+import { NavigationActions } from 'react-navigation';
 
 class AddCard extends Component {
   state = {
@@ -8,10 +9,27 @@ class AddCard extends Component {
     answer: '',
   }
 
+  static navigationOptions = {
+    headerLeft: null
+  }
+
   addCardAndSave = (title, card) => {
     addCardToDeck(title, card)
       .then(() => {
         this.setState({ question: '', answer: '' })
+      })
+  }
+
+  backToDeck = (id) => {
+    getDeck(id)
+      .then((deck) => {
+        this.props.navigation.dispatch(NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home'}),
+            NavigationActions.navigate({ routeName: 'Deck', params: {deck}}),
+          ]
+        }))
       })
   }
 
@@ -47,6 +65,12 @@ class AddCard extends Component {
           }}
         >
           <Text style={{ color: '#FFFFFF', fontSize: 22 }}>Submit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submit}
+          onPress={() => this.backToDeck(title)}
+        >
+          <Text style={{ color: '#FFFFFF', fontSize: 22 }}>Back to Deck</Text>
         </TouchableOpacity>
       </View>
     );
