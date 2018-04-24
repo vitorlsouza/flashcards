@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation'
 import { FontAwesome, Ionicons, Entypo } from '@expo/vector-icons'
-import { setLocalNotification, clearLocalNotification } from './src/utils/helpers'
+import { setLocalNotification } from './src/utils/helpers'
 import Decks from './src/pages/Decks'
 import Deck from './src/pages/Deck'
 import Quiz from './src/pages/Quiz'
@@ -59,8 +59,9 @@ const Routes = StackNavigator({
 
 export default class App extends Component {
   componentDidMount() {
-    // setLocalNotification()
+    setLocalNotification()
   }
+
   render() {
     return <Routes />
   }

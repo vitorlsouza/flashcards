@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 class Deck extends Component {
   state = {
@@ -23,6 +24,14 @@ class Deck extends Component {
     }
   }
 
+  startQuiz = () => {
+    const { questions } = this.props.navigation.state.params.deck
+    this.props.navigation.navigate('Quiz', {questions})
+
+    // clearLocalNotification()
+    //   .then(setLocalNotification)
+  }
+
   render() {
     const { title, questions } = this.props.navigation.state.params.deck
     const { navigate } = this.props.navigation
@@ -43,7 +52,7 @@ class Deck extends Component {
           <TouchableOpacity
             disabled={isDisabled}
             style={isDisabled ? styles.buttonStartDisable : styles.buttonStartEnable}
-            onPress={() => navigate('Quiz', {questions})}
+            onPress={() => this.startQuiz()}
           >
             <Text style={{ fontSize: 22, color: '#FFFFFF' }}>{isDisabled ? 'No question' : 'Start Quiz'}</Text>
           </TouchableOpacity>
